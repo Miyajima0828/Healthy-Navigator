@@ -1,0 +1,45 @@
+services:
+  app:
+    build:
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 5173:5173
+
+  web:
+    build:
+      dockerfile: ./docker/web/Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+
+  db:
+    build:
+      dockerfile: ./docker/db/Dockerfile
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=healthy_navigation
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - PGTXZ=Asia/Tokyo
+
+  mail:
+    image: axllent/mailpit
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    environment:
+      - MP_DATA_FILE=/data/mailpit.db
+    volumes:
+      - mp-data-file:/data
+
+volumes:
+  postgres-volume:
+  mp-data-file:
