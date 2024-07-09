@@ -18,9 +18,12 @@
                             </h3>
                             <div class="mt-2">
                                 <form>
-                                    <input type="text" wire:model="searchTerm" placeholder="食品名を入力">
+                                    <input type="search" wire:model="searchTerm" placeholder="食品名を入力">
                                     <button wire:click.prevent="updateSearchTerm">検索</button>
                                 </form>
+                                @if ($foods === null)
+                                    <p>検索結果が見つかりません</p>
+                                @elseif ($foods)
                                 <table>
                                     <thead>
                                         <tr>
@@ -33,7 +36,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($foods)
                                             @foreach ($foods as $food)
                                                 <tr>
                                                     <td>{{ $food->name }}</td>
