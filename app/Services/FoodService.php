@@ -22,8 +22,8 @@ class FoodService
         $cacheKey = 'foods_search_' . md5($searchTerm);
 
         // キャッシュからデータを取得、存在しない場合はデータベースから取得してキャッシュに保存
-        // return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($searchTerm) {
+        return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($searchTerm) {
             return Food::query()->where('name', 'like', '%' . $searchTerm . '%')->exists() ? Food::where('name', 'like', '%' . $searchTerm . '%')->get() : null;
-        // });
+        });
     }
 }
