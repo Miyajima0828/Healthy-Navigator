@@ -17,8 +17,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'dummy@email.com',
         ]);
         $this->call(CategorySeeder::class);
+        $this->call(FoodSeeder::class);
     }
 }
