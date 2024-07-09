@@ -10,31 +10,44 @@ use Livewire\Attributes\On;
 class SearchFoodModal extends Component
 {
     public $searchTerm = '';
-    public $foods;
-    protected $foodService;
+    public $foods = [];
     public bool $is_show = false;
 
-    // #[On()]でイベント名を設定する
+    protected $foodService;
+
+    public function boot(FoodService $foodService)
+    {
+        $this->foodService = $foodService;
+    }
+
     #[On('openModal')]
     public function openModal()
     {
+        $this->resetState();
         $this->is_show = true;
     }
 
-    /**
-     * 検索結果を取得
-     * @return void
-     */
-    public function updateSearchTerm(): void
+    #[On('closeModal')]
+    public function closeModal()
     {
-        $this->foodService = new FoodService();
-        $this->foods = $this->foodService->SearchFoodModals($this->searchTerm);
+        $this->resetState();
     }
 
-    #[On('foodSelected')]
+    public function updateSearchTerm(): void
+    {
+        $this->foods = $this->foodService->searchFoodModals($this->searchTerm);
+    }
+
     public function selectFood($food)
     {
         $this->dispatch('addFood', $food);
+        $this->closeModal();
+    }
+
+    private function resetState()
+    {
+        $this->searchTerm = '';
+        $this->foods = [];
         $this->is_show = false;
     }
 
