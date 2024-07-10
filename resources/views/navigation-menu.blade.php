@@ -67,7 +67,7 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
-                @livewire('meal-addition')
+                <a href="{{ route('meal.create') }}">食事追加</a>
             </div>
 
             <!-- Hamburger -->
