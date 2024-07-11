@@ -9,19 +9,15 @@
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                        {{ __('home') }}
-                    </x-nav-link>
+                <div class="px-8 py-4">
+                    <livewire:search-food-modal />
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
                 <!-- Settings Dropdown -->
-                <div class="ms-3 relative">
+                <div class="mx-4 ms-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <span class="inline-flex rounded-md">
@@ -67,7 +63,8 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
-                <a href="{{ route('meal.create') }}">食事追加</a>
+                <a class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-blue-700"
+                    href="{{ route('meal.create') }}">食事追加</a>
             </div>
 
             <!-- Hamburger -->
