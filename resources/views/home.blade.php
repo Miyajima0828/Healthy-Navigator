@@ -4,6 +4,8 @@
             {{ __('home') }}
         </h2>
     </x-slot>
-
     
+    <div class=" m-10">
+        <livewire:search-food-modal />
+    </div>
 </x-app-layout>

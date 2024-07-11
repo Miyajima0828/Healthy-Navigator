@@ -1,6 +1,6 @@
 <div>
-    <button type="button" wire:click="callModal">
-        食品検索
-    </button>
-    @livewire('search-food-modal')
+    <div class="w-4/5 flex justify-end my-10">
+        <livewire:search-food-modal />
+    </div>
+        @livewire('insert-meal-component')
 </div>

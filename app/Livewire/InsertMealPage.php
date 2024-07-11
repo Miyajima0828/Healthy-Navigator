@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 
 class InsertMealPage extends Component
 {
-
+    #[On('callModal')]
     public function callModal()
     {
         // イベント名を指定して呼び出す
