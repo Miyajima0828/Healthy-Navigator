@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MealController;
+use App\Livewire\InsertMealComponent;
 use App\Livewire\InsertMealPage;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +15,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/insert-meal', InsertMealPage::class)->name('meal.index');
-    Route::post('/insert-meal', [MealController::class, 'create'])->name('meal.create');
+    Route::get('meal/create', InsertMealPage::class)->name('meal.create');
+    Route::post('meal/store', [InsertMealComponent::class, 'insertMeal'])->name('meal.store');
 });
