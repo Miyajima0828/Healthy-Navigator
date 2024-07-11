@@ -10,7 +10,7 @@ use Livewire\Attributes\On;
 class SearchFoodModal extends Component
 {
     public string $searchTerm = '';
-    public array $foods = [];
+    public  $foods = [];
     public bool $is_show = false;
 
     protected $foodService;
@@ -49,10 +49,15 @@ class SearchFoodModal extends Component
 
     /**
      * @param $food
-     * @return void
+     * @return
      */
-    public function selectFood($food): void
+    #[On('selectFood')]
+    public function selectFood($food)
     {
+        if (request()->header('referer') === env('APP_URL') . '/home') {
+            session()->flash('food', $food);
+            return $this->redirectRoute('meal.create');
+        }
         $this->dispatch('addFood', $food);
         $this->closeModal();
     }
