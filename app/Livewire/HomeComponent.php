@@ -4,8 +4,11 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Home extends Component
+class HomeComponent extends Component
 {
+    public string $message = '';
+
+
     public function render()
     {
         return view('livewire.home');
