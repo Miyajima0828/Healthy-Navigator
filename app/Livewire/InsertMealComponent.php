@@ -12,7 +12,8 @@ class InsertMealComponent extends Component
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    public string $Message = '';
+    protected $mealService;
+
 
     public function mount()
     {
@@ -20,14 +21,13 @@ class InsertMealComponent extends Component
             $this->addFood(session('food'));
         }
     }
-    protected $mealService;
 
     public function insertMeal(MealRequest $request)
     {
         $this->mealService = new MealService();
         $validatedData = $request->validated();
         $this->mealService->store($validatedData);
-        $this->Message = '登録しました';
+        session()->flash('message', '食事を追加しました');
         return redirect()->route('home');
     }
 
