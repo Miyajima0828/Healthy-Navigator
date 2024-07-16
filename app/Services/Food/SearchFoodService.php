@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 /**
  * 食品関連の処理を行うサービスクラス
  */
-class FoodSearchService
+class SearchFoodService
 {
     /**
      * 検索条件に一致する食品を取得

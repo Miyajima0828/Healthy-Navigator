@@ -3,7 +3,7 @@
 namespace App\Livewire\Meal;
 
 use App\Http\Requests\MealRequest;
-use App\Services\Meal\MealInsertService;
+use App\Services\Meal\InsertMealService;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -12,7 +12,7 @@ class InsertMealComponent extends Component
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    protected $MealInsertService;
+    protected $InsertMealService;
 
 
     public function mount()
@@ -24,9 +24,9 @@ class InsertMealComponent extends Component
 
     public function insertMeal(MealRequest $request)
     {
-        $this->MealInsertService = new MealInsertService();
+        $this->InsertMealService = new InsertMealService();
         $validatedData = $request->validated();
-        $this->MealInsertService->store($validatedData);
+        $this->InsertMealService->store($validatedData);
         session()->flash('message', '食事を追加しました');
         return redirect()->route('home');
     }

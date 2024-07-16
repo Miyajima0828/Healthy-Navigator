@@ -13,7 +13,7 @@ use App\Exceptions\BadRequestException;
 /**
  * 食事関連の処理を行うサービスクラス
  */
-class MealInsertService
+class InsertMealService
 {
     /**
      * Store a newly created resource in storage.

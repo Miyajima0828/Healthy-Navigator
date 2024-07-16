@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Food;
 
-use App\Services\Food\FoodSearchService;
+use App\Services\Food\SearchFoodService;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -13,11 +13,11 @@ class SearchFoodModal extends Component
     public  $foods = [];
     public bool $is_show = false;
 
-    protected $FoodSearchService;
+    protected $SearchFoodService;
 
-    public function boot(FoodSearchService $FoodSearchService)
+    public function boot(SearchFoodService $SearchFoodService)
     {
-        $this->FoodSearchService = $FoodSearchService;
+        $this->SearchFoodService = $SearchFoodService;
     }
 
     /**
@@ -44,7 +44,7 @@ class SearchFoodModal extends Component
      */
     public function updateSearchTerm(): void
     {
-        $this->foods = $this->searchTerm ? $this->FoodSearchService->searchFoodModals($this->searchTerm) : null;
+        $this->foods = $this->searchTerm ? $this->SearchFoodService->searchFoodModals($this->searchTerm) : null;
     }
 
     /**
