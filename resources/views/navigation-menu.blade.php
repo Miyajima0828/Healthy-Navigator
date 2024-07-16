@@ -10,7 +10,7 @@
                     </a>
                 </div>
                 <div class="px-8 py-4">
-                    <livewire:search-food-modal />
+                    <livewire:food.search-food-modal />
                 </div>
             </div>
 
@@ -63,8 +63,13 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
-                <a class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-blue-700"
-                    href="{{ route('meal.create') }}">食事追加</a>
+                <div class="px-8 py-4">
+                    <livewire:goal.set-goal-modal />
+                </div>
+                <a class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
+                    href="{{ route('meal.create') }}">
+                    食事追加
+                </a>
             </div>
 
             <!-- Hamburger -->

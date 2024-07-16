@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Meal;
 
 use Livewire\Attributes\On;
 use Livewire\Component;
-
+use App\Livewire\food\SearchFoodModal;
 
 class InsertMealPage extends Component
 {
@@ -17,6 +17,6 @@ class InsertMealPage extends Component
 
     public function render()
     {
-        return view('livewire.insert-meal-page')->layout('layouts.app');
+        return view('livewire.meal.insert-meal-page')->layout('layouts.app');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Food;
 
 use App\Services\Food\FoodSearchService;
 use Illuminate\View\View;
@@ -77,6 +77,6 @@ class SearchFoodModal extends Component
      */
     public function render(): View
     {
-        return view('livewire.search-food-modal');
+        return view('livewire.food.search-food-modal');
     }
 }

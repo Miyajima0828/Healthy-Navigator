@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Meal;
 
 use App\Http\Requests\MealRequest;
 use App\Services\Meal\MealInsertService;
@@ -62,6 +62,6 @@ class InsertMealComponent extends Component
 
     public function render()
     {
-        return view('livewire.insert-meal-component');
+        return view('livewire.meal.insert-meal-component');
     }
 }
