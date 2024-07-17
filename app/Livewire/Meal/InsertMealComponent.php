@@ -7,6 +7,12 @@ use App\Services\Meal\InsertMealService;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
+/**
+ * @property array foods
+ * @property array originalFoodsValue
+ * @property int quantity
+ * @property InsertMealService InsertMealService
+ */
 class InsertMealComponent extends Component
 {
     public array $foods = [];
@@ -14,10 +20,9 @@ class InsertMealComponent extends Component
     public int $quantity = 100;
     protected $InsertMealService;
 
-
     public function mount()
     {
-        if (session()->has('food')) {
+        if (session()?->has('food')) {
             $this->addFood(session('food'));
         }
     }
@@ -27,7 +32,7 @@ class InsertMealComponent extends Component
         $this->InsertMealService = new InsertMealService();
         $validatedData = $request->validated();
         $this->InsertMealService->store($validatedData);
-        session()->flash('message', '食事を追加しました');
+        session()?->flash('message', '食事を追加しました');
         return redirect()->route('home');
     }
 
