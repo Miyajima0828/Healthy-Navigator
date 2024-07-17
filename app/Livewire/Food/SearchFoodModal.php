@@ -51,7 +51,7 @@ class SearchFoodModal extends Component
      */
     public function updateSearchTerm(): void
     {
-        $this->foods = $this->searchTerm ? $this->SearchFoodService->searchFoodModals($this->searchTerm) : null;
+        $this->foods = $this->searchTerm ? $this->SearchFoodService->search($this->searchTerm) : null;
     }
 
     /**
