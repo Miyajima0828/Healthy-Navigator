@@ -2,14 +2,20 @@
 
 namespace App\Livewire\Home;
 
+use Illuminate\View\View;
 use Livewire\Component;
 
+/**
+ * @property string message
+ */
 class HomeComponent extends Component
 {
     public string $message = '';
 
-
-    public function render()
+    /**
+     * @return view
+     */
+    public function render(): View
     {
         return view('livewire.home.home');
     }
