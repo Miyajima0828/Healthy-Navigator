@@ -185,7 +185,7 @@ return [
 
     'attributes' => [
         'address' => '住所',
-        'age' => '歳',
+        'age' => '年齢',
         'amount' => '額',
         'area' => 'エリア',
         'available' => '利用可能',
