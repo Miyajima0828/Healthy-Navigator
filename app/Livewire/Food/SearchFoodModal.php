@@ -8,6 +8,12 @@ use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
+/**
+ * @property string searchTerm
+ * @property array foods
+ * @property bool is_show
+ * @property SearchFoodService SearchFoodService
+ */
 class SearchFoodModal extends Component
 {
     public string $searchTerm = '';
