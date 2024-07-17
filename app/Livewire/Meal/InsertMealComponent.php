@@ -11,14 +11,14 @@ use Livewire\Attributes\On;
  * @property array foods
  * @property array originalFoodsValue
  * @property int quantity
- * @property InsertMealService InsertMealService
+ * @property InsertMealService insertMealService
  */
 class InsertMealComponent extends Component
 {
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    protected $InsertMealService;
+    protected $insertMealService;
 
     public function mount()
     {
@@ -29,9 +29,9 @@ class InsertMealComponent extends Component
 
     public function insertMeal(MealRequest $request)
     {
-        $this->InsertMealService = new InsertMealService();
+        $this->insertMealService = new InsertMealService();
         $validatedData = $request->validated();
-        $this->InsertMealService->store($validatedData);
+        $this->insertMealService->store($validatedData);
         session()?->flash('message', '食事を追加しました');
         return redirect()->route('home');
     }
