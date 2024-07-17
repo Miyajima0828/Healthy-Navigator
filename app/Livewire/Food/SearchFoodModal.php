@@ -14,11 +14,11 @@ class SearchFoodModal extends Component
     public  $foods = [];
     public bool $is_show = false;
 
-    protected $SearchFoodService;
+    protected $searchFoodService;
 
     public function boot(SearchFoodService $SearchFoodService)
     {
-        $this->SearchFoodService = $SearchFoodService;
+        $this->searchFoodService = $SearchFoodService;
     }
 
     /**
