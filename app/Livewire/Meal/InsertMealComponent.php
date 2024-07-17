@@ -1,33 +1,38 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Meal;
 
 use App\Http\Requests\MealRequest;
-use App\Services\MealService;
+use App\Services\Meal\InsertMealService;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
+/**
+ * @property array foods
+ * @property array originalFoodsValue
+ * @property int quantity
+ * @property InsertMealService insertMealService
+ */
 class InsertMealComponent extends Component
 {
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    protected $mealService;
-
+    protected $insertMealService;
 
     public function mount()
     {
-        if (session()->has('food')) {
+        if (session()?->has('food')) {
             $this->addFood(session('food'));
         }
     }
 
     public function insertMeal(MealRequest $request)
     {
-        $this->mealService = new MealService();
+        $this->insertMealService = new InsertMealService();
         $validatedData = $request->validated();
-        $this->mealService->store($validatedData);
-        session()->flash('message', '食事を追加しました');
+        $this->insertMealService->store($validatedData);
+        session()?->flash('message', '食事を追加しました');
         return redirect()->route('home');
     }
 
@@ -62,6 +67,6 @@ class InsertMealComponent extends Component
 
     public function render()
     {
-        return view('livewire.insert-meal-component');
+        return view('livewire.meal.insert-meal-component');
     }
 }

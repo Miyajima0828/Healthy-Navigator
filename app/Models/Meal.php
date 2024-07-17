@@ -32,6 +32,7 @@ class Meal extends Model
     ];
 
     /**
+     * ユーザとのリレーション
      * @return BelongsTo
      */
     public function user(): BelongsTo
@@ -40,6 +41,7 @@ class Meal extends Model
     }
 
     /**
+     * 食品との多対多のリレーション
      * @return BelongsToMany
      */
     public function foods()

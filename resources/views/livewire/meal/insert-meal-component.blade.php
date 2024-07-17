@@ -30,7 +30,7 @@
                     <td class="px-4 py-2">{{ round($food['carbohydrate']) }} g</td>
                     <td class="px-4 py-2 text-center">
                         <button wire:click="removeFood({{ $food['id'] }})"
-                            class="px-4 py-2 font-bold text-black bg-red-500 rounded hover:bg-red-700">✕</button>
+                            class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-red-700">✕</button>
                     </td>
                 </tr>
             @endforeach

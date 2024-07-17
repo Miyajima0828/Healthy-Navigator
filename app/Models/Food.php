@@ -47,4 +47,13 @@ class Food extends Model
     {
         return $this->belongsToMany(Meal::class)->using(MealFood::class);
     }
+
+    /**
+     * カテゴリーとのリレーション
+     * @return BelongsToMany
+     */
+    public function categories() : BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

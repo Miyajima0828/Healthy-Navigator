@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Meal;
 
 use App\Models\Food;
 use App\Models\Meal;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\BadRequestException;
 
 /**
- * 食品関連の処理を行うサービスクラス
+ * 食事関連の処理を行うサービスクラス
  */
-class MealService
+class InsertMealService
 {
     /**
      * Store a newly created resource in storage.

@@ -37,6 +37,7 @@ class MealFood extends Model
     public $timestamps = true;
 
     /**
+     * 食事とのリレーション
      * @return BelongsTo
      */
     public function meal(): BelongsTo
@@ -45,6 +46,7 @@ class MealFood extends Model
     }
 
     /**
+     * 食品とのリレーション
      * @return BelongsTo
      */
     public function food(): BelongsTo
