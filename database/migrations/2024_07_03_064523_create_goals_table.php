@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->integer('calories')->unsigned()->comment('カロリー kcal');
+            $table->integer('calorie')->unsigned()->comment('カロリー kcal');
             $table->float('protein')->unsigned()->comment('タンパク質  g');
             $table->float('fat')->unsigned()->comment('脂質 g');
             $table->float('carbohydrate')->unsigned()->comment('炭水化物 g');
