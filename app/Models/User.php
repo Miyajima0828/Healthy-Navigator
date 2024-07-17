@@ -21,7 +21,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @param datetime email_verified_at
  * @param datetime created_at
  * @param datetime updated_at
- * @param string profile_photo_path
  * @param int age
  * @param int gender
  */
