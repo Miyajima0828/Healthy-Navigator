@@ -50,7 +50,7 @@ tinker:
 	docker compose exec php php artisan tinker
 
 test:
-	docker compose exec php php artisan test
+	docker compose exec app php artisan test
 
 phpcs:
 	docker compose exec php composer phpcs
