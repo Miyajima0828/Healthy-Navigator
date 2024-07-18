@@ -22,9 +22,9 @@ class SearchFoodModal extends Component
 
     protected $searchFoodService;
 
-    public function boot(SearchFoodService $SearchFoodService)
+    public function boot(SearchFoodService $searchFoodService)
     {
-        $this->searchFoodService = $SearchFoodService;
+        $this->searchFoodService = $searchFoodService;
     }
 
     /**
@@ -51,7 +51,7 @@ class SearchFoodModal extends Component
      */
     public function updateSearchTerm(): void
     {
-        $this->foods = $this->searchTerm ? $this->SearchFoodService->search($this->searchTerm) : null;
+        $this->foods = $this->searchTerm ? $this->searchFoodService->search($this->searchTerm) : null;
     }
 
     /**
