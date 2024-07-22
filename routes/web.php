@@ -4,6 +4,7 @@ use App\Livewire\Home\HomeComponent;
 use App\Livewire\Meal\InsertMealComponent;
 use App\Livewire\Meal\InsertMealPage;
 use App\Livewire\Goal\SetGoalModal;
+use App\Livewire\Meal\GetMealRecordsPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,4 +20,5 @@ Route::middleware([
     Route::get('meal/create', InsertMealPage::class)->name('meal.create');
     Route::post('meal/store', [InsertMealComponent::class, 'insertMeal'])->name('meal.store');
     Route::put('goal/update', [SetGoalModal::class, 'upsert'])->name('goal.update');
+    Route::get('meal/records', GetMealRecordsPage::class)->name('meal.records');
 });

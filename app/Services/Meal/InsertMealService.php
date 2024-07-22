@@ -23,14 +23,14 @@ class InsertMealService
         try {
             $this->validateMealRequest($request);
             DB::beginTransaction();
-            $meal = Meal::query()->create([
+            $meal = Meal::query()->updateOrCreate([
                 'user_id' => Auth::id(),
                 'date' => $request['date'],
                 'meal_type' => $request['meal_type'],
             ]);
-
+            $meal->foods()->detach();
             foreach ($request['foods'] as $food) {
-                MealFood::query()->create([
+                MealFood::query()->updateOrCreate([
                     'meal_id' => $meal->id,
                     'food_id' => $food['id'],
                     'quantity' => $food['quantity'],

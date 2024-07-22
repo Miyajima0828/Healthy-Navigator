@@ -46,6 +46,21 @@ class Meal extends Model
      */
     public function foods()
     {
-        return $this->belongsToMany(Food::class)->using(MealFood::class);
+        return $this->belongsToMany(Food::class,'meal_food')->withPivot('quantity')->withTimestamps();
+    }
+
+    /**
+     * 食事タイプの表示
+     * @return string
+     */
+    public function getMealTypeAttribute(): string
+    {
+        $mealTypes = [
+            0 => '朝食',
+            1 => '昼食',
+            2 => '夕食',
+            3 => '間食',
+        ];
+        return $mealTypes[$this->attributes['meal_type']];
     }
 }
