@@ -4,23 +4,24 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('これまでの食事記録') }}
             </h2>
-            <form wire:submit.prevent="getMealRecordsByDate" class="w-1/3 rounded-lg flex justify-center items-center">
-                <div class="flex-1">
-                    <div class="flex justify-center">
-                        <input type="date" id="date" wire:model="selectedDate"
-                            class="w-3/4 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <button type="submit"
-                            class="bg-slate-400 hover:bg-slate-500 text-sm text-white font-bold ml-2 p-2 rounded focus:outline-none focus:shadow-outline">
-                            <span class="material-symbols-outlined align-middle">
-                                search
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </form>
         </div>
     </x-slot>
-
+    <div class="flex justify-center mb-6">
+        <form wire:submit.prevent="getMealRecordsByDate" class="w-1/3 rounded-lg flex justify-center items-center">
+            <div class="flex-1">
+                <div class="flex justify-center">
+                    <input type="date" id="date" wire:model="selectedDate"
+                        class="w-3/4 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <button type="submit"
+                        class="bg-slate-400 hover:bg-slate-500 text-sm text-white font-bold ml-2 p-2 rounded focus:outline-none focus:shadow-outline">
+                        <span class="material-symbols-outlined align-middle">
+                            search
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="overflow-x-auto">
         <div class="min-w-max">
             <div class="grid grid-cols-8 gap-0 border border-gray-600">
