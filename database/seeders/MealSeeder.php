@@ -28,7 +28,7 @@ class MealSeeder extends Seeder
 
     private function createMealsForDate($date, $foods, $mealTypes) {
         foreach ($mealTypes as $mealType) {
-            $meal = [
+            $mealParam = [
                 'user_id' => 1,
                 'date' => $date,
                 'meal_type' => $mealType,
@@ -38,8 +38,8 @@ class MealSeeder extends Seeder
                     $food->id => ['quantity' => rand(100, 300)],
                 ];
             })->toArray();
-            $mealId = Meal::factory()->create($meal)->id;
-            Meal::find($mealId)->foods()->attach($mealFood);
+            $meal = Meal::factory()->create($mealParam);
+            $meal->foods()->attach($mealFood);
         }
     }
 }
