@@ -21,21 +21,25 @@ class MealSeeder extends Seeder
         $foods = Food::inRandomOrder()->limit(30)->get();
 
         foreach (range(0, 20) as $i) {
-            foreach ($mealTypes as $mealType) {
-                $meal = [
-                    'user_id' => 1,
-                    'date' => $startOfDate->copy()->addDays($i),
-                    'meal_type' => $mealType,
-                ];
-                $mealFood = $foods->random(3)->mapWithKeys(function ($food) {
-                    return [
-                        $food->id => ['quantity' => rand(100, 300),]
+            $date = $startOfDate->copy()->addDays($i);
+            $this->createMealsForDate($date, $foods, $mealTypes);
+        }
+    }
 
-                    ];
-                })->toArray();
-                $mealId = Meal::factory()->create($meal)->id;
-                Meal::find($mealId)->foods()->attach($mealFood);
-            }
+    private function createMealsForDate($date, $foods, $mealTypes) {
+        foreach ($mealTypes as $mealType) {
+            $meal = [
+                'user_id' => 1,
+                'date' => $date,
+                'meal_type' => $mealType,
+            ];
+            $mealFood = $foods->random(3)->mapWithKeys(function ($food) {
+                return [
+                    $food->id => ['quantity' => rand(100, 300)],
+                ];
+            })->toArray();
+            $mealId = Meal::factory()->create($meal)->id;
+            Meal::find($mealId)->foods()->attach($mealFood);
         }
     }
 }
