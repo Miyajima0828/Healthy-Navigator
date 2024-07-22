@@ -17,9 +17,9 @@ class MealFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 1,
-            'date' => now(),
-            'meal_type' => 0,
+            'user_id' => \App\Models\User::factory(), // 動的にユーザーを生成
+            'date' => $this->faker->dateTimeThisYear(), // fakerを使用してランダムな日付を生成
+            'meal_type' => $this->faker->numberBetween(0, 2), // 0から2の範囲でランダムな値を生成
         ];
     }
 }
