@@ -45,7 +45,7 @@ class Food extends Model
      */
     public function meals() : BelongsToMany
     {
-        return $this->belongsToMany(Meal::class)->using(MealFood::class);
+        return $this->belongsToMany(Meal::class,'meal_food')->withPivot('quantity')->withTimestamps();
     }
 
     /**
@@ -55,5 +55,13 @@ class Food extends Model
     public function categories() : BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function getShortNameAttribute()
+    {
+        // 正規表現を使用して<>や()、[]に囲まれた文字列を除外
+        $cleanName = preg_replace('/[<\(\[\（\【\《\＜\［].*?[>\)\]\）\】\》\＞\］]/u', '', $this->name);
+
+        return preg_replace('/\s/u', '', $cleanName);
     }
 }
