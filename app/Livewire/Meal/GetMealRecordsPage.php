@@ -9,6 +9,14 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+/**
+ * @property Collection mealRecords
+ * @property Carbon today
+ * @property Carbon startOfWeek
+ * @property Carbon endOfWeek
+ * @property array week
+ * @property ?string selectedDate
+ */
 class GetMealRecordsPage extends Component
 {
     use WithPagination;
@@ -30,8 +38,10 @@ class GetMealRecordsPage extends Component
 
     /**
      * 該当の日付の週を初期化するメソッド
+     * @param Carbon $date
+     * @return void
      */
-    private function initializeDates($date)
+    private function initializeDates($date): void
     {
         $this->startOfWeek = $date->copy()->startOfWeek();
         $this->endOfWeek = $date->copy()->endOfWeek();
@@ -44,8 +54,11 @@ class GetMealRecordsPage extends Component
 
     /**
      * 食事記録を取得するメソッド
+     * @param Carbon $startOfWeek
+     * @param Carbon $endOfWeek
+     * @return void
      */
-    private function fetchMealRecords($startOfWeek, $endOfWeek)
+    private function fetchMealRecords($startOfWeek, $endOfWeek): void
     {
         $this->mealRecords = Meal::query()
             ->where('user_id', auth()->id())
@@ -64,9 +77,10 @@ class GetMealRecordsPage extends Component
 
     /**
      * 選択した日付の食事記録を取得するメソッド
+     * @return void
      */
     #[On('getMealRecordsByDate')]
-    public function getMealRecordsByDate()
+    public function getMealRecordsByDate(): void
     {
         if (!$this->selectedDate) {
             return;
@@ -79,6 +93,7 @@ class GetMealRecordsPage extends Component
 
     /**
      * selectedDateの日付を一週間分遡るメソッド
+     * @return void
      */
     public function showPreviousWeek()
     {
@@ -88,6 +103,7 @@ class GetMealRecordsPage extends Component
 
     /**
      * selectedDateの日付を一週間分進めるメソッド
+     * @return void
      */
     public function showNextWeek()
     {
