@@ -20,7 +20,7 @@ interface getMealServiceInterface
      * 指定された栄養素の合計値を計算するメソッド
      * @param Collection $meals
      * @param string $nutrient
-     * @return float
+     * @return int
      */
-    public function calculateNutrientSum(Collection $meals, string $nutrient): float;
+    public function calculateNutrientSum(Collection $meals, string $nutrient): int;
 }
