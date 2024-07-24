@@ -57,11 +57,4 @@ class Food extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function getShortNameAttribute()
-    {
-        // 正規表現を使用して<>や()、[]に囲まれた文字列を除外
-        $cleanName = preg_replace('/[<\(\[\（\【\《\＜\［].*?[>\)\]\）\】\》\＞\］]/u', '', $this->name);
-
-        return preg_replace('/\s/u', '', $cleanName);
-    }
 }
