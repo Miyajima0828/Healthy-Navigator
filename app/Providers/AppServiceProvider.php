@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\Meal\getMealService;
-use App\Services\Meal\getMealServiceInterface;
+use App\Services\Meal\GetMealService;
+use App\Services\Meal\GetMealServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            getMealServiceInterface::class,
-            getMealService::class
+            GetMealServiceInterface::class,
+            GetMealService::class
         );
     }
 

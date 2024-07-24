@@ -4,33 +4,35 @@ namespace App\Services\Meal;
 
 use App\Models\Meal;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
 /**
  * 食事関連の処理を行うサービスクラス
  */
-class getMealService implements getMealServiceInterface
+class GetMealService implements GetMealServiceInterface
 {
     /**
      * 食事記録を取得するメソッド
-     * @param Carbon $startOfWeek
-     * @param Carbon $endOfWeek
+     * @param Carbon $startDate
+     * @param Carbon|null $endDate
      * @return Collection
      */
-    public function getMealRecords($startOfWeek, $endOfWeek): Collection
+    public function getMealRecords(Carbon $startDate, Carbon $endDate = null): Collection
     {
-        return Meal::query()
+        $query = Meal::query()
             ->where('user_id', auth()->id())
-            ->whereBetween('date', [$startOfWeek, $endOfWeek])
             ->orderBy('date', 'asc')
             ->orderBy('meal_type', 'asc')
-            ->with('foods')
-            ->get()
-            ->map(function ($meal) {
-                $meal->total_calories = $meal->foods->sum(function ($food) {
-                    return $food->calorie * ($food->pivot->quantity / 100);
-                });
-                return $meal;
+            ->with('foods');
+
+        $endDate ? $query->whereBetween('date', [$startDate, $endDate]) : $query->whereDate('date', $startDate);
+
+        return $query->get()->map(function ($meal) {
+            $meal->total_calories = $meal->foods->sum(function ($food) {
+                return $food->calorie * ($food->pivot->quantity / 100);
             });
+            return $meal;
+        });
     }
 
         /**

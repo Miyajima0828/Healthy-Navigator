@@ -2,19 +2,18 @@
 
 namespace App\Services\Meal;
 
-use App\Models\Meal;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
-
-interface getMealServiceInterface
+interface GetMealServiceInterface
 {
-        /**
+    /**
      * 食事記録を取得するメソッド
-     * @param Carbon $startOfWeek
-     * @param Carbon $endOfWeek
+     * @param Carbon $startDate
+     * @param Carbon|null $endDate
      * @return Collection
      */
-    public function getMealRecords($startOfWeek, $endOfWeek): Collection;
+    public function getMealRecords(Carbon $startDate, Carbon $endDate = null): Collection;
 
         /**
      * 指定された栄養素の合計値を計算するメソッド
