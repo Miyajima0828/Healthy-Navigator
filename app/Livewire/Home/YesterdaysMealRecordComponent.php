@@ -13,7 +13,7 @@ class YesterdaysMealRecordComponent extends Component
 
     public function mount()
     {
-        $meals = $this->GetMealService->getMealRecords(now()->copy()->subDay());
+        $meals = $this->getMealService->getMealRecords(now()->copy()->subDay());
         $this->yesterdaysMeals = collect([
             '朝食' => $meals->where('meal_type', '朝食')->first(),
             '昼食' => $meals->where('meal_type', '昼食')->first(),
@@ -28,7 +28,7 @@ class YesterdaysMealRecordComponent extends Component
      */
     public function boot(GetMealServiceInterface $getMealService)
     {
-        $this->GetMealService = $getMealService;
+        $this->getMealService = $getMealService;
     }
 
     public function render()

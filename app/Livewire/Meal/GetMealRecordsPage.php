@@ -35,7 +35,7 @@ class GetMealRecordsPage extends Component
 
     public function boot(GetMealServiceInterface $getMealService)
     {
-        $this->GetMealService = $getMealService;
+        $this->getMealService = $getMealService;
     }
 
     /**
@@ -90,7 +90,7 @@ class GetMealRecordsPage extends Component
 
     public function render()
     {
-        $mealRecords = $this->GetMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
+        $mealRecords = $this->getMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
         return view('livewire.meal.get-meal-records-page', compact('mealRecords'))
         ->layout('layouts.app');
     }
