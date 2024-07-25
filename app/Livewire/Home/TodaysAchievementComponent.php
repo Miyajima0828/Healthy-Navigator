@@ -12,36 +12,36 @@ use Livewire\Component;
 class TodaysAchievementComponent extends Component
 {
     public Collection $meals;
-    public Goal $goal;
-    public  $nutrientAchievement;
-    protected GetMealServiceInterface $GetMealService;
-    protected GetGoalServiceInterface $GetGoalService;
+    public ?Goal $goal;
+    public string  $nutrientAchievement;
+    protected GetMealServiceInterface $getMealService;
+    protected GetGoalServiceInterface $getGoalService;
 
     public function mount()
     {
-        $this->meals = $this->GetMealService->getMealRecords(Carbon::today());
-        $this->goal = $this->GetGoalService->getGoal();
+        $this->meals = $this->getMealService->getMealRecords(Carbon::today());
+        $this->goal = $this->getGoalService->getGoal();
         $this->nutrientAchievement = $this->generateNutrientAchievementJson();
     }
 
     /**
      * サービスクラスをDIするメソッド
-     * @param GetMealServiceInterface $GetMealService
+     * @param GetMealServiceInterface $getMealService
      */
-    public function boot(GetMealServiceInterface $GetMealService, GetGoalServiceInterface $GetGoalService)
+    public function boot(GetMealServiceInterface $getMealService, GetGoalServiceInterface $getGoalService)
     {
-        $this->GetMealService = $GetMealService;
-        $this->GetGoalService = $GetGoalService;
+        $this->getMealService = $getMealService;
+        $this->getGoalService = $getGoalService;
     }
 
     public function generateNutrientAchievementJson()
     {
-        return json_encode([
-            round($this->GetMealService->calculateNutrientSum($this->meals, 'calorie') / $this->goal->calorie * 100),
-            round($this->GetMealService->calculateNutrientSum($this->meals, 'protein') / $this->goal->protein * 100),
-            round($this->GetMealService->calculateNutrientSum($this->meals, 'fat') / $this->goal->fat * 100),
-            round($this->GetMealService->calculateNutrientSum($this->meals, 'carbohydrate') / $this->goal->carbohydrate * 100)
-        ]);
+        return $this->goal ? json_encode([
+            $this->goal->calorie ? round($this->GetMealService->calculateNutrientSum($this->meals, 'calorie') / $this->goal->calorie * 100) : 0,
+            $this->goal->protein ? round($this->GetMealService->calculateNutrientSum($this->meals, 'protein') / $this->goal->protein * 100) : 0,
+            $this->goal->fat ? round($this->GetMealService->calculateNutrientSum($this->meals, 'fat') / $this->goal->fat * 100) : 0,
+            $this->goal->carbohydrate ? round($this->GetMealService->calculateNutrientSum($this->meals, 'carbohydrate') / $this->goal->carbohydrate * 100) : 0
+        ]) : '';
     }
 
     public function render()

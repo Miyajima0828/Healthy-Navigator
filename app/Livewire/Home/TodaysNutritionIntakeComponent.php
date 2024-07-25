@@ -15,24 +15,24 @@ class TodaysNutritionIntakeComponent extends Component
     public Collection $meals;
     public SupportCollection $totalNutrition;
     public Goal $goal;
-    protected GetMealServiceInterface $GetMealService;
-    protected GetGoalServiceInterface $GetGoalService;
+    protected GetMealServiceInterface $getMealService;
+    protected GetGoalServiceInterface $getGoalService;
 
     public function mount()
     {
-        $this->meals = $this->GetMealService->getMealRecords(Carbon::today());
+        $this->meals = $this->getMealService->getMealRecords(Carbon::today());
         $this->totalNutrition = $this->getTodaysNutrition();
-        $this->goal = $this->GetGoalService->getGoal();
+        $this->goal = $this->getGoalService->getGoal();
     }
 
     /**
      * サービスクラスをDIするメソッド
-     * @param GetMealServiceInterface $GetMealService
+     * @param GetMealServiceInterface $getMealService
      */
-    public function boot(GetMealServiceInterface $GetMealService, GetGoalServiceInterface $GetGoalService)
+    public function boot(GetMealServiceInterface $getMealService, GetGoalServiceInterface $getGoalService)
     {
-        $this->GetMealService = $GetMealService;
-        $this->GetGoalService = $GetGoalService;
+        $this->getMealService = $getMealService;
+        $this->getGoalService = $getGoalService;
     }
 
     /**
@@ -42,10 +42,10 @@ class TodaysNutritionIntakeComponent extends Component
     public function getTodaysNutrition()
     {
         return collect([
-            'total_calorie' => $this->GetMealService->calculateNutrientSum($this->meals,'calorie'),
-            'total_protein' => $this->GetMealService->calculateNutrientSum($this->meals,'protein'),
-            'total_fat' => $this->GetMealService->calculateNutrientSum($this->meals,'fat'),
-            'total_carbohydrate' => $this->GetMealService->calculateNutrientSum($this->meals,'carbohydrate'),
+            'total_calorie' => $this->getMealService->calculateNutrientSum($this->meals,'calorie'),
+            'total_protein' => $this->getMealService->calculateNutrientSum($this->meals,'protein'),
+            'total_fat' => $this->getMealService->calculateNutrientSum($this->meals,'fat'),
+            'total_carbohydrate' => $this->getMealService->calculateNutrientSum($this->meals,'carbohydrate'),
         ]);
     }
     public function render()
