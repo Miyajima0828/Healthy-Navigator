@@ -1,10 +1,10 @@
 <div class="w-full h-full p-4 bg-amber-50 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-center mb-4 text-slate-600">今日の達成率</h2>
     <div class="h-72 flex justify-center items-center">
-        @if(!$goal)
-        <p class="text-gray-500">目標を設定すると表示されます</p>
-        @else
+        @if($goal)
         <canvas id="myChart"></canvas>
+        @else
+        <p>目標を設定すると表示されます</p>
         @endif
         <script>
             const ctx = document.getElementById('myChart').getContext('2d');

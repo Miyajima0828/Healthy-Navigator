@@ -9,7 +9,7 @@
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-                <div class="px-8 py-4 flex items-center">
+                <div class="px-8 py-4">
                     <livewire:food.search-food-modal />
                 </div>
             </div>
