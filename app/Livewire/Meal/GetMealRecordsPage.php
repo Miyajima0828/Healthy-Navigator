@@ -2,15 +2,13 @@
 
 namespace App\Livewire\Meal;
 
-use App\Models\Meal;
+use App\Services\Meal\GetMealServiceInterface;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 /**
- * @property Collection mealRecords
  * @property Carbon today
  * @property Carbon startOfWeek
  * @property Carbon endOfWeek
@@ -21,19 +19,23 @@ class GetMealRecordsPage extends Component
 {
     use WithPagination;
 
-    public Collection $mealRecords;
     public Carbon $today;
     public Carbon $startOfWeek;
     public Carbon $endOfWeek;
     public array $week = [];
-    public ?string $selectedDate= null;
+    public ?string $selectedDate = null;
+    protected GetMealServiceInterface $GetMealService;
 
     public function mount()
     {
         $this->today = Carbon::now();
         $this->selectedDate = $this->today->toDateString();
         $this->initializeDates($this->today);
-        $this->fetchMealRecords($this->startOfWeek, $this->endOfWeek);
+    }
+
+    public function boot(GetMealServiceInterface $GetMealService)
+    {
+        $this->GetMealService = $GetMealService;
     }
 
     /**
@@ -53,29 +55,6 @@ class GetMealRecordsPage extends Component
     }
 
     /**
-     * 食事記録を取得するメソッド
-     * @param Carbon $startOfWeek
-     * @param Carbon $endOfWeek
-     * @return void
-     */
-    private function fetchMealRecords($startOfWeek, $endOfWeek): void
-    {
-        $this->mealRecords = Meal::query()
-            ->where('user_id', auth()->id())
-            ->whereBetween('date', [$startOfWeek, $endOfWeek])
-            ->orderBy('date', 'asc')
-            ->orderBy('meal_type', 'asc')
-            ->with('foods') // リレーションをロード
-            ->get()
-            ->map(function ($meal) {
-                $meal->total_calories = $meal->foods->sum(function ($food) {
-                    return $food->calorie * ($food->pivot->quantity / 100);
-                });
-                return $meal;
-            });
-    }
-
-    /**
      * 選択した日付の食事記録を取得するメソッド
      * @return void
      */
@@ -87,8 +66,6 @@ class GetMealRecordsPage extends Component
         }
         $selectedDate = Carbon::parse($this->selectedDate);
         $this->initializeDates($selectedDate);
-        $this->fetchMealRecords($this->startOfWeek, $this->endOfWeek);
-
     }
 
     /**
@@ -113,6 +90,8 @@ class GetMealRecordsPage extends Component
 
     public function render()
     {
-        return view('livewire.meal.get-meal-records-page')->layout('layouts.app');
+        $mealRecords = $this->GetMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
+        return view('livewire.meal.get-meal-records-page', compact('mealRecords'))
+        ->layout('layouts.app');
     }
 }
