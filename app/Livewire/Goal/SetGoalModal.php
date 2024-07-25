@@ -3,6 +3,8 @@
 namespace App\Livewire\Goal;
 
 use App\Http\Requests\GoalUpsertRequest;
+use App\Models\Goal;
+use App\Services\Goal\GetGoalServiceInterface;
 use App\Services\Goal\UpsertGoalService;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Attributes\On;
@@ -16,9 +18,19 @@ use Livewire\Component;
 class SetGoalModal extends Component
 {
     public bool $is_show = false;
-    public array $goal = [];
+    public Goal $goal;
     protected UpsertGoalService $upsertGoalService;
+    protected GetGoalServiceInterface $getGoalService;
 
+    /**
+     * コンポーネントの初期設定
+     * @param GetGoalServiceInterface $getGoalService
+     */
+    public function boot(GetGoalServiceInterface $getGoalService)
+    {
+        $this->getGoalService = $getGoalService;
+        $this->goal = $this->getGoalService->getGoal();
+    }
     /**
      * モーダルを開く
      */
@@ -45,8 +57,7 @@ class SetGoalModal extends Component
     public function upsert(GoalUpsertRequest $request): RedirectResponse
     {
         $this->upsertGoalService = new UpsertGoalService();
-        $this->goal = $request->validated()['goal'];
-        $this->upsertGoalService->upsert($this->goal);
+        $this->upsertGoalService->upsert($request->validated()['goal']);
         session()?->flash('message', '目標を設定しました');
         return redirect()->route('home');
     }
