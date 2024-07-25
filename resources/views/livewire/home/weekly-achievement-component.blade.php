@@ -1,5 +1,10 @@
 <div class="w-full h-full mt-4 px-2 bg-amber-50 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-center my-4 text-slate-600">今週の達成率</h2>
+    @if(!$weeklyGoal)
+    <div class="w-4/5 h-5/6 flex justify-center items-center m-auto text-center">
+        <p class="text-gray-500">目標を設定すると表示されます</p>
+    </div>
+    @else
     <div class="w-4/5 m-auto grid grid-cols-3 items-center">
         <div></div>
         <div class="w-full font-semibold text-gray-500 flex justify-center items-center border-b border-gray-300">今週の摂取量</div>
@@ -76,4 +81,5 @@
             });
         </script>
     </div>
+    @endif
 </div>
