@@ -56,7 +56,9 @@
                     indexAxis: 'y',
                     scales: {
                         x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            min: 0,
+                            max: 100,
                         }
                     }
                 }
