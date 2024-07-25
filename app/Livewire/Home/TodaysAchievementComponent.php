@@ -12,7 +12,7 @@ use Livewire\Component;
 class TodaysAchievementComponent extends Component
 {
     public Collection $meals;
-    public Goal $goal;
+    public ?Goal $goal;
     public string  $nutrientAchievement;
     protected GetMealServiceInterface $getMealService;
     protected GetGoalServiceInterface $getGoalService;
@@ -36,12 +36,12 @@ class TodaysAchievementComponent extends Component
 
     public function generateNutrientAchievementJson()
     {
-        return json_encode([
+        return $this->goal ? json_encode([
             round($this->getMealService->calculateNutrientSum($this->meals, 'calorie') / $this->goal->calorie * 100),
             round($this->getMealService->calculateNutrientSum($this->meals, 'protein') / $this->goal->protein * 100),
             round($this->getMealService->calculateNutrientSum($this->meals, 'fat') / $this->goal->fat * 100),
             round($this->getMealService->calculateNutrientSum($this->meals, 'carbohydrate') / $this->goal->carbohydrate * 100)
-        ]);
+        ]) : '';
     }
 
     public function render()
