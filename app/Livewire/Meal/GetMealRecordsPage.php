@@ -24,7 +24,7 @@ class GetMealRecordsPage extends Component
     public Carbon $endOfWeek;
     public array $week = [];
     public ?string $selectedDate = null;
-    protected GetMealServiceInterface $GetMealService;
+    protected GetMealServiceInterface $getMealService;
 
     public function mount()
     {
@@ -33,9 +33,9 @@ class GetMealRecordsPage extends Component
         $this->initializeDates($this->today);
     }
 
-    public function boot(GetMealServiceInterface $GetMealService)
+    public function boot(GetMealServiceInterface $getMealService)
     {
-        $this->GetMealService = $GetMealService;
+        $this->getMealService = $getMealService;
     }
 
     /**
@@ -90,7 +90,7 @@ class GetMealRecordsPage extends Component
 
     public function render()
     {
-        $mealRecords = $this->GetMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
+        $mealRecords = $this->getMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
         return view('livewire.meal.get-meal-records-page', compact('mealRecords'))
         ->layout('layouts.app');
     }
