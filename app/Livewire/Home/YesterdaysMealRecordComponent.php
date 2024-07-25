@@ -9,7 +9,7 @@ use Livewire\Component;
 class YesterdaysMealRecordComponent extends Component
 {
     public Collection $yesterdaysMeals;
-    protected GetMealServiceInterface $GetMealService;
+    protected GetMealServiceInterface $getMealService;
 
     public function mount()
     {
@@ -24,11 +24,11 @@ class YesterdaysMealRecordComponent extends Component
 
     /**
      * サービスクラスをDIするメソッド
-     * @param GetMealServiceInterface $GetMealService
+     * @param GetMealServiceInterface $getMealService
      */
-    public function boot(GetMealServiceInterface $GetMealService)
+    public function boot(GetMealServiceInterface $getMealService)
     {
-        $this->GetMealService = $GetMealService;
+        $this->GetMealService = $getMealService;
     }
 
     public function render()

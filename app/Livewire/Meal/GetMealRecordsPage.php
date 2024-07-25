@@ -24,7 +24,7 @@ class GetMealRecordsPage extends Component
     public Carbon $endOfWeek;
     public array $week = [];
     public ?string $selectedDate = null;
-    protected GetMealServiceInterface $GetMealService;
+    protected GetMealServiceInterface $getMealService;
 
     public function mount()
     {
@@ -33,9 +33,9 @@ class GetMealRecordsPage extends Component
         $this->initializeDates($this->today);
     }
 
-    public function boot(GetMealServiceInterface $GetMealService)
+    public function boot(GetMealServiceInterface $getMealService)
     {
-        $this->GetMealService = $GetMealService;
+        $this->GetMealService = $getMealService;
     }
 
     /**

@@ -15,8 +15,8 @@ class TodaysNutritionIntakeComponent extends Component
     public Collection $meals;
     public SupportCollection $totalNutrition;
     public Goal $goal;
-    protected GetMealServiceInterface $GetMealService;
-    protected GetGoalServiceInterface $GetGoalService;
+    protected GetMealServiceInterface $getMealService;
+    protected GetGoalServiceInterface $getGoalService;
 
     public function mount()
     {
@@ -27,12 +27,12 @@ class TodaysNutritionIntakeComponent extends Component
 
     /**
      * サービスクラスをDIするメソッド
-     * @param GetMealServiceInterface $GetMealService
+     * @param GetMealServiceInterface $getMealService
      */
-    public function boot(GetMealServiceInterface $GetMealService, GetGoalServiceInterface $GetGoalService)
+    public function boot(GetMealServiceInterface $getMealService, GetGoalServiceInterface $getGoalService)
     {
-        $this->GetMealService = $GetMealService;
-        $this->GetGoalService = $GetGoalService;
+        $this->GetMealService = $getMealService;
+        $this->GetGoalService = $getGoalService;
     }
 
     /**
