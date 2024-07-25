@@ -37,10 +37,10 @@ class TodaysAchievementComponent extends Component
     public function generateNutrientAchievementJson()
     {
         return $this->goal ? json_encode([
-            round($this->getMealService->calculateNutrientSum($this->meals, 'calorie') / $this->goal->calorie * 100),
-            round($this->getMealService->calculateNutrientSum($this->meals, 'protein') / $this->goal->protein * 100),
-            round($this->getMealService->calculateNutrientSum($this->meals, 'fat') / $this->goal->fat * 100),
-            round($this->getMealService->calculateNutrientSum($this->meals, 'carbohydrate') / $this->goal->carbohydrate * 100)
+            $this->goal->calorie ? round($this->GetMealService->calculateNutrientSum($this->meals, 'calorie') / $this->goal->calorie * 100) : 0,
+            $this->goal->protein ? round($this->GetMealService->calculateNutrientSum($this->meals, 'protein') / $this->goal->protein * 100) : 0,
+            $this->goal->fat ? round($this->GetMealService->calculateNutrientSum($this->meals, 'fat') / $this->goal->fat * 100) : 0,
+            $this->goal->carbohydrate ? round($this->GetMealService->calculateNutrientSum($this->meals, 'carbohydrate') / $this->goal->carbohydrate * 100) : 0
         ]) : '';
     }
 
