@@ -17,7 +17,10 @@ class GetGoalService implements GetGoalServiceInterface
     public function getGoal()
     {
         $goal = Goal::query()->where('user_id', Auth::id())->first();
-        
+        if (!$goal) {
+            // エラーハンドリングを追加
+            throw new Exception('目標が見つかりません');
+        }
         return $goal;
     }
 }

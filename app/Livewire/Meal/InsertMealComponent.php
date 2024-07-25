@@ -54,10 +54,10 @@ class InsertMealComponent extends Component
     public function updateQuantity($id, $quantity)
     {
         $this->foods[$id]['quantity'] = $quantity;
-        $this->foods[$id]['calorie'] = round($this->originalFoodsValue[$id]['calorie'] * $quantity / 100);
-        $this->foods[$id]['protein'] = round($this->originalFoodsValue[$id]['protein'] * $quantity / 100);
-        $this->foods[$id]['fat'] = round($this->originalFoodsValue[$id]['fat'] * $quantity / 100);
-        $this->foods[$id]['carbohydrate'] = round($this->originalFoodsValue[$id]['carbohydrate'] * $quantity / 100);
+        $this->foods[$id]['calorie'] = $this->originalFoodsValue[$id]['calorie'] * $quantity / 100;
+        $this->foods[$id]['protein'] = $this->originalFoodsValue[$id]['protein'] * $quantity / 100;
+        $this->foods[$id]['fat'] = $this->originalFoodsValue[$id]['fat'] * $quantity / 100;
+        $this->foods[$id]['carbohydrate'] = $this->originalFoodsValue[$id]['carbohydrate'] * $quantity / 100;
     }
 
     public function removeFood($id)

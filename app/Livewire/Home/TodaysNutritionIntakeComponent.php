@@ -14,7 +14,7 @@ class TodaysNutritionIntakeComponent extends Component
 {
     public Collection $meals;
     public SupportCollection $totalNutrition;
-    public ?Goal $goal;
+    public Goal $goal;
     protected GetMealServiceInterface $getMealService;
     protected GetGoalServiceInterface $getGoalService;
 
