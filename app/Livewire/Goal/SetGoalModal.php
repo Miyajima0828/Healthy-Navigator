@@ -18,7 +18,7 @@ use Livewire\Component;
 class SetGoalModal extends Component
 {
     public bool $is_show = false;
-    public Goal $goal;
+    public ?Goal $goal;
     protected UpsertGoalService $upsertGoalService;
     protected GetGoalServiceInterface $getGoalService;
 
