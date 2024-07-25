@@ -16,7 +16,7 @@ class UpsertGoalService
     public function upsert($goal): void
     {
         $user = Auth::user();
-        $result = Goal::query()->updateOrCreate(
+        Goal::query()->updateOrCreate(
             ['user_id' => $user->id],
             [
                 'user_id' => $user->id,

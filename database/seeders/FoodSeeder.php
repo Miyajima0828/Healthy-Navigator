@@ -21,7 +21,6 @@ class FoodSeeder extends Seeder
         array_shift($rows);
         foreach ($rows as $row) {
             $data = str_getcsv($row);
-
             Food::query()->insert([
                 'id' => $data[0],
                 'category_id' => $data[1],
@@ -31,6 +30,7 @@ class FoodSeeder extends Seeder
                 'fat' => $data[5],
                 'carbohydrate' => $data[6],
                 'detail' => $data[7],
+                'short_name' => $data[8],
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);

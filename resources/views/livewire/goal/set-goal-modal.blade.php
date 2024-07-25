@@ -25,28 +25,28 @@
                                             カロリー(kcal)
                                         </label>
                                     </div>
-                                    <input type="number" name="goal[calorie]" value="0" id="calorie"
+                                    <input type="number" name="goal[calorie]" value={{old('goal[calorie]',$goal ? $goal->calorie : 0)}} id="calorie"
                                         class="w-4/5 m-auto rounded-full text-center border border-gray-300 p-2">
                                     <div class="text-center">
                                         <label for="protein" class="text-lg text-gray-700">
                                             タンパク質(g)
                                         </label>
                                     </div>
-                                    <input type="number" name="goal[protein]" value="0" id="protein"
+                                    <input type="number" name="goal[protein]" value={{old('goal[protein]',$goal ? $goal->protein : 0)}} id="protein"
                                         class="w-4/5 m-auto rounded-full text-center border border-gray-300 p-2">
                                     <div class="text-center">
                                         <label for="fat" class="text-lg text-gray-700">
                                             脂質(g)
                                         </label>
                                     </div>
-                                    <input type="number" name="goal[fat]" value="0" id="fat"
+                                    <input type="number" name="goal[fat]" value={{old('goal[fat]',$goal ? $goal->fat : 0)}} id="fat"
                                         class="w-4/5 m-auto rounded-full text-center border border-gray-300 p-2">
                                     <div class="text-center">
                                         <label for="carbohydrate" class="text-lg text-gray-700">
                                             炭水化物(g)
                                         </label>
                                     </div>
-                                    <input type="number" name="goal[carbohydrate]" value="0" id="carbohydrate"
+                                    <input type="number" name="goal[carbohydrate]" value={{old('goal[carbohydrate]',$goal ? $goal->carbohydrate : 0)}} id="carbohydrate"
                                         class="w-4/5 m-auto rounded-full text-center border border-gray-300 p-2">
                                     <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button wire:click="closeModal()" type="button"

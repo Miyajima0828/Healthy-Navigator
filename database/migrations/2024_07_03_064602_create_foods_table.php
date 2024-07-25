@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('name')->comment('食品名');
+            $table->string('short_name')->comment('略称');
             $table->float('calorie')->unsigned()->comment('カロリー kcal');
             $table->float('protein')->unsigned()->comment('タンパク質 g');
             $table->float('fat')->unsigned()->comment('脂質 g');
