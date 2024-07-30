@@ -6,7 +6,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Livewire\food\SearchFoodModal;
 
-class InsertMealPage extends Component
+class UpsertMealPage extends Component
 {
     #[On('callModal')]
     public function callModal()
@@ -17,6 +17,6 @@ class InsertMealPage extends Component
 
     public function render()
     {
-        return view('livewire.meal.insert-meal-page')->layout('layouts.app');
+        return view('livewire.meal.upsert-meal-page')->layout('layouts.app');
     }
 }

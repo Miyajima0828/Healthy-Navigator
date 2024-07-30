@@ -3,7 +3,8 @@
 namespace App\Livewire\Meal;
 
 use App\Http\Requests\MealRequest;
-use App\Services\Meal\InsertMealService;
+use App\Services\Meal\UpsertMealService;
+use App\Services\Meal\UpsertMealServiceInterface;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -11,14 +12,14 @@ use Livewire\Attributes\On;
  * @property array foods
  * @property array originalFoodsValue
  * @property int quantity
- * @property InsertMealService insertMealService
+ * @property UpsertMealServiceInterface upsertMealService
  */
-class InsertMealComponent extends Component
+class UpsertMealComponent extends Component
 {
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    protected $insertMealService;
+    protected UpsertMealServiceInterface $upsertMealService;
 
     public function mount()
     {
@@ -27,11 +28,16 @@ class InsertMealComponent extends Component
         }
     }
 
-    public function insertMeal(MealRequest $request)
+    public function boot(UpsertMealServiceInterface $upsertMealService)
     {
-        $this->insertMealService = new InsertMealService();
+        $this->upsertMealService = $upsertMealService;
+    }
+
+    public function upsertMeal(MealRequest $request)
+    {
+        $this->upsertMealService = new UpsertMealService();
         $validatedData = $request->validated();
-        $this->insertMealService->store($validatedData);
+        $this->upsertMealService->store($validatedData);
         session()?->flash('message', '食事を追加しました');
         return redirect()->route('home');
     }
@@ -67,6 +73,6 @@ class InsertMealComponent extends Component
 
     public function render()
     {
-        return view('livewire.meal.insert-meal-component');
+        return view('livewire.meal.upsert-meal-component');
     }
 }

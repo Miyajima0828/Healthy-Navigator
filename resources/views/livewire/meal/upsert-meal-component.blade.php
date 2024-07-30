@@ -30,13 +30,16 @@
                     <td class="px-4 py-2">{{ round($food['carbohydrate']) }} g</td>
                     <td class="px-4 py-2 text-center">
                         <button wire:click="removeFood({{ $food['id'] }})"
-                            class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-red-700">✕</button>
+                            class="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-red-700">
+                            ✕
+                        </button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <form action="{{ route('meal.store') }}" method="POST" id="mealForm" class="mt-8 w-full max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
+    <form action="{{ route('meal.store') }}" method="POST" id="mealForm"
+        class="mt-8 w-full max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
         @csrf
         @foreach ($foods as $food)
             <input type="hidden" name="foods[{{ $food['id'] }}][id]" value="{{ $food['id'] }}">
@@ -56,7 +59,11 @@
                 <option value="3">間食</option>
             </select>
         </div>
-        <button type="submit" class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
-            wire:confirm="食事を追加しますか?">食事追加</button>
+        <button
+            type="submit"
+            class="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
+        >
+            食事追加
+        </button>
     </form>
 </div>
