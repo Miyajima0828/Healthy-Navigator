@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('protein')->unsigned()->comment('タンパク質  g');
             $table->float('fat')->unsigned()->comment('脂質 g');
             $table->float('carbohydrate')->unsigned()->comment('炭水化物 g');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

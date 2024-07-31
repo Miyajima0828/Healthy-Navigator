@@ -16,6 +16,8 @@ class TodaysAchievementComponent extends Component
     public string  $nutrientAchievement;
     protected GetMealServiceInterface $getMealService;
     protected GetGoalServiceInterface $getGoalService;
+    // ビューの名前
+    const VIEW_NAME = 'livewire.home.todays-achievement-component';
 
     public function mount()
     {
@@ -46,6 +48,6 @@ class TodaysAchievementComponent extends Component
 
     public function render()
     {
-        return view('livewire.home.todays-achievement-component');
+        return view(self::VIEW_NAME);
     }
 }

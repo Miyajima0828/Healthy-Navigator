@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Meal;
 
-use App\Http\Requests\MealRequest;
-use App\Services\Meal\InsertMealService;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -11,14 +9,14 @@ use Livewire\Attributes\On;
  * @property array foods
  * @property array originalFoodsValue
  * @property int quantity
- * @property InsertMealService insertMealService
  */
-class InsertMealComponent extends Component
+class UpsertMealComponent extends Component
 {
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    protected $insertMealService;
+    // モーダルの名前
+    const VIEW_NAME = 'livewire.meal.upsert-meal-component';
 
     public function mount()
     {
@@ -27,15 +25,11 @@ class InsertMealComponent extends Component
         }
     }
 
-    public function insertMeal(MealRequest $request)
-    {
-        $this->insertMealService = new InsertMealService();
-        $validatedData = $request->validated();
-        $this->insertMealService->store($validatedData);
-        session()?->flash('message', '食事を追加しました');
-        return redirect()->route('home');
-    }
-
+    /**
+     * 食品を追加する
+     * @param array $food
+     * @return void
+     */
     #[On('addFood')]
     public function addFood($food)
     {
@@ -51,6 +45,12 @@ class InsertMealComponent extends Component
         ];
     }
 
+    /**
+     * 食品の量を更新する
+     * @param int $id
+     * @param int $quantity
+     * @return void
+     */
     public function updateQuantity($id, $quantity)
     {
         $this->foods[$id]['quantity'] = $quantity;
@@ -60,6 +60,11 @@ class InsertMealComponent extends Component
         $this->foods[$id]['carbohydrate'] = round($this->originalFoodsValue[$id]['carbohydrate'] * $quantity / 100);
     }
 
+    /**
+     * 食品を削除する
+     * @param int $id
+     * @return void
+     */
     public function removeFood($id)
     {
         unset($this->foods[$id]);
@@ -67,6 +72,6 @@ class InsertMealComponent extends Component
 
     public function render()
     {
-        return view('livewire.meal.insert-meal-component');
+        return view(self::VIEW_NAME);
     }
 }

@@ -13,10 +13,13 @@ use App\Exceptions\BadRequestException;
 /**
  * 食事関連の処理を行うサービスクラス
  */
-class InsertMealService
+class UpsertMealService implements UpsertMealServiceInterface
 {
     /**
-     * Store a newly created resource in storage.
+     * 食事記録を保存するメソッド
+     * @param array $request
+     * @throws Exception
+     * @return void
      */
     public function store($request)
     {
@@ -43,6 +46,12 @@ class InsertMealService
         }
     }
 
+    /**
+     * リクエストのバリデーションするメソッド
+     * @param array $request
+     * @throws BadRequestException
+     * @return void
+     */
     private function validateMealRequest($request)
     {
         if (!$this->areAllFoodsExist($request)) {
@@ -50,6 +59,11 @@ class InsertMealService
         }
     }
 
+    /**
+     * リクエストされた食品が全て存在するか確認するメソッド
+     * @param array $request
+     * @return bool
+     */
     private function areAllFoodsExist($request): bool
     {
         foreach ($request['foods'] as $food) {

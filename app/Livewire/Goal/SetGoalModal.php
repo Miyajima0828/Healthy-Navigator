@@ -21,6 +21,8 @@ class SetGoalModal extends Component
     public ?Goal $goal;
     protected UpsertGoalService $upsertGoalService;
     protected GetGoalServiceInterface $getGoalService;
+    // モーダルの名前
+    const VIEW_NAME = 'livewire.goal.set-goal-modal';
 
     /**
      * コンポーネントの初期設定
@@ -64,6 +66,6 @@ class SetGoalModal extends Component
 
     public function render()
     {
-        return view('livewire.goal.set-goal-modal');
+        return view(self::VIEW_NAME);
     }
 }

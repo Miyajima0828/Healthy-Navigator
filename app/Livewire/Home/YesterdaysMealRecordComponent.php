@@ -10,6 +10,8 @@ class YesterdaysMealRecordComponent extends Component
 {
     public Collection $yesterdaysMeals;
     protected GetMealServiceInterface $getMealService;
+    // ビューの名前
+    const VIEW_NAME = 'livewire.home.yesterdays-meal-record-component';
 
     public function mount()
     {

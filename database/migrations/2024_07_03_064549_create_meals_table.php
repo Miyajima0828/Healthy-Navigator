@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->date('date')->comment('日付');
             $table->integer('meal_type')->comment('食事タイプ 0:朝食 1:昼食 2:夕食 3:間食');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

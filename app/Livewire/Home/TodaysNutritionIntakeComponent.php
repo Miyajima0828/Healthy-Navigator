@@ -17,6 +17,8 @@ class TodaysNutritionIntakeComponent extends Component
     public ?Goal $goal;
     protected GetMealServiceInterface $getMealService;
     protected GetGoalServiceInterface $getGoalService;
+    // ビューの名前
+    const VIEW_NAME = 'livewire.home.todays-nutrition-intake-component';
 
     public function mount()
     {
@@ -50,6 +52,6 @@ class TodaysNutritionIntakeComponent extends Component
     }
     public function render()
     {
-        return view('livewire.home.todays-nutrition-intake-component');
+        return view(self::VIEW_NAME);
     }
 }

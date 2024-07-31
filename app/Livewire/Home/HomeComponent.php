@@ -11,12 +11,14 @@ use Livewire\Component;
 class HomeComponent extends Component
 {
     public string $message = '';
+    // ビューの名前
+    const VIEW_NAME = 'livewire.home.home';
 
     /**
      * @return view
      */
     public function render(): View
     {
-        return view('livewire.home.home');
+        return view(self::VIEW_NAME);
     }
 }

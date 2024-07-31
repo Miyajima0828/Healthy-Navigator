@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -20,7 +21,7 @@ use Carbon\Carbon;
 class Meal extends Model
 {
     use HasFactory;
-
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      * @var array<int, string>
@@ -62,5 +63,10 @@ class Meal extends Model
             3 => '間食',
         ];
         return $mealTypes[$this->attributes['meal_type']];
+    }
+
+    public function getOriginalMealTypeAttribute()
+    {
+        return $this->getAttributes()['meal_type'];
     }
 }
