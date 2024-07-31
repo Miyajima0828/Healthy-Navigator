@@ -17,24 +17,26 @@
                             </h3>
                             <div class="mt-4">
                                 <form class="text-right">
-                                    <input type="search" wire:model="searchTerm" placeholder="食品名を入力" class="w-4/5 rounded-full text-center border border-gray-300 p-2">
-                                    <button wire:click.prevent="updateSearchTerm" class="mx-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">検索</button>
+                                    <input type="search" wire:model="searchTerm" placeholder="食品名を入力"
+                                        class="w-4/5 rounded-full text-center border border-gray-300 p-2">
+                                    <button wire:click.prevent="updateSearchTerm"
+                                        class="mx-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">検索</button>
                                 </form>
                                 @if ($foods === null)
                                     <p class="text-center mt-4">検索結果が見つかりません</p>
                                 @elseif ($foods)
-                                <table class="min-w-full bg-white mt-4">
-                                    <thead class="bg-gray-200">
-                                        <tr>
-                                            <th class="py-2 px-4 border-b">食品名 (100gあたり)</th>
-                                            <th class="py-2 px-4 border-b">カロリー(kcal)</th>
-                                            <th class="py-2 px-4 border-b">タンパク質(g)</th>
-                                            <th class="py-2 px-4 border-b">脂質(g)</th>
-                                            <th class="py-2 px-4 border-b">炭水化物(g)</th>
-                                            <th class="py-2 px-4 border-b"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    <table class="min-w-full bg-white mt-4">
+                                        <thead class="bg-gray-200">
+                                            <tr>
+                                                <th class="py-2 px-4 border-b">食品名 (100gあたり)</th>
+                                                <th class="py-2 px-4 border-b">カロリー(kcal)</th>
+                                                <th class="py-2 px-4 border-b">タンパク質(g)</th>
+                                                <th class="py-2 px-4 border-b">脂質(g)</th>
+                                                <th class="py-2 px-4 border-b">炭水化物(g)</th>
+                                                <th class="py-2 px-4 border-b"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             @foreach ($foods as $food)
                                                 <tr class="hover:bg-gray-100">
                                                     <td class="py-2 px-4 border-b">{{ $food->name }}</td>
@@ -43,13 +45,14 @@
                                                     <td class="py-2 px-4 border-b">{{ $food->fat }}g</td>
                                                     <td class="py-2 px-4 border-b">{{ $food->carbohydrate }}g</td>
                                                     <td class="py-2 px-4 border-b text-center">
-                                                        <button wire:click="selectFood({{ $food }})" class="px-4 py-1 text-white bg-emerald-500 rounded hover:bg-emerald-700">追加</button>
+                                                        <button type="button" wire:click="selectFood({{ $food }})"
+                                                            class="px-4 py-1 text-white bg-emerald-500 rounded hover:bg-emerald-700">追加</button>
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                        @endif
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
