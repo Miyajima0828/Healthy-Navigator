@@ -21,7 +21,7 @@ class GoalController extends Controller
      */
     public function upsert(GoalUpsertRequest $request): JsonResponse
     {
-        $goal = $request->validated()->input('goal');
+        $goal = $request->validated()['goal'];
         $this->upsertGoalService->upsert($goal);
 
         return response()->json(['message' => '目標を設定しました'], 200);
