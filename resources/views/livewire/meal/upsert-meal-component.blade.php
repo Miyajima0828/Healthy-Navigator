@@ -41,6 +41,7 @@
     <form action="{{ route('meal.store') }}" method="POST" id="mealForm"
         class="mt-8 w-full max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
         @csrf
+        @method('PUT')
         @foreach ($foods as $food)
             <input type="hidden" name="foods[{{ $food['id'] }}][id]" value="{{ $food['id'] }}">
             <input type="hidden" name="foods[{{ $food['id'] }}][name]" value="{{ $food['name'] }}">
