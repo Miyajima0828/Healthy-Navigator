@@ -2,9 +2,6 @@
 
 namespace App\Livewire\Meal;
 
-use App\Http\Requests\MealRequest;
-use App\Services\Meal\UpsertMealService;
-use App\Services\Meal\UpsertMealServiceInterface;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -12,39 +9,18 @@ use Livewire\Attributes\On;
  * @property array foods
  * @property array originalFoodsValue
  * @property int quantity
- * @property UpsertMealServiceInterface upsertMealService
  */
 class UpsertMealComponent extends Component
 {
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
-    protected UpsertMealServiceInterface $upsertMealService;
 
     public function mount()
     {
         if (session()?->has('food')) {
             $this->addFood(session('food'));
         }
-    }
-
-    public function boot(UpsertMealServiceInterface $upsertMealService)
-    {
-        $this->upsertMealService = $upsertMealService;
-    }
-
-    /**
-     * 食事の記録を登録または更新する
-     * @param MealRequest $request
-     * @return void
-     */
-    public function upsertMeal(MealRequest $request)
-    {
-        $this->upsertMealService = new UpsertMealService();
-        $validatedData = $request->validated();
-        $this->upsertMealService->store($validatedData);
-        session()?->flash('message', '食事を追加しました');
-        return $this->determineRedirect($request);
     }
 
     /**
@@ -90,18 +66,6 @@ class UpsertMealComponent extends Component
     public function removeFood($id)
     {
         unset($this->foods[$id]);
-    }
-
-    /**
-     * リダイレクト先を決定する
-     * @param MealRequest $request
-     * @return void
-     */
-    private function determineRedirect(MealRequest $request)
-    {
-        return $request->header('referer') === env('APP_URL') . '/meal/create' ?
-            redirect()->route('home') :
-            redirect()->route('meal.records');
     }
 
     public function render()
