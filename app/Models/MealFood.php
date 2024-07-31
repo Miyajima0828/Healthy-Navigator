@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 食事と食品の中間テーブルモデル
@@ -21,6 +22,7 @@ use Carbon\Carbon;
 class MealFood extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'meal_food';
 
