@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Food;
 
+use App\Livewire\Meal\EditMealRecordsModal;
 use App\Services\Food\SearchFoodService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -61,11 +62,17 @@ class SearchFoodModal extends Component
     #[On('selectFood')]
     public function selectFood($food, Request $request)
     {
-
-        if ($request->header('referer') === env('APP_URL') . '/home') { // Expected type 'object'. Found 'array<string, mixed>'というエラーが出る
-            session()?->flash('food', $food); //ここでExpected type 'object'. Found 'null'.intelephense(P1006)というエラーが出る
+        // 食品検索モーダルを開いたページがhomeページの場合
+        if ($request->header('referer') === env('APP_URL') . '/home') {
+            session()?->flash('food', $food);
             return $this->redirectRoute('meal.create');
         }
+        // 食品検索モーダルを開いたページがmeal/recordsページの場合
+        if ($request->header('referer') === env('APP_URL') . '/meal/records') {
+            $this->dispatch('addFood', $food)->to(EditMealRecordsModal::class);
+            $this->closeModal();
+        }
+
         $this->dispatch('addFood', $food);
         $this->closeModal();
     }
