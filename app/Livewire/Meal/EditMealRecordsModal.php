@@ -79,10 +79,9 @@ class EditMealRecordsModal extends Component
     public function updateQuantity($id, $quantity)
     {
         $this->foods[$id]['quantity'] = $quantity;
-        $this->foods[$id]['calorie'] = round($this->originalFoodsValue[$id]['calorie'] * $quantity / 100);
-        $this->foods[$id]['protein'] = round($this->originalFoodsValue[$id]['protein'] * $quantity / 100);
-        $this->foods[$id]['fat'] = round($this->originalFoodsValue[$id]['fat'] * $quantity / 100);
-        $this->foods[$id]['carbohydrate'] = round($this->originalFoodsValue[$id]['carbohydrate'] * $quantity / 100);
+        foreach (['calorie', 'protein', 'fat', 'carbohydrate'] as $nutrient) {
+            $this->foods[$id][$nutrient] = round($this->originalFoodsValue[$id][$nutrient] * $quantity / 100);
+        }
     }
 
     /**
