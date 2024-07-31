@@ -20,6 +20,8 @@ class SearchFoodModal extends Component
     public string $searchTerm = '';
     public  $foods = [];
     public bool $is_show = false;
+    // モーダルの名前
+    const VIEW_NAME = 'livewire.food.search-food-modal';
 
     protected $searchFoodService;
 
@@ -92,6 +94,6 @@ class SearchFoodModal extends Component
      */
     public function render(): View
     {
-        return view('livewire.food.search-food-modal');
+        return view(self::VIEW_NAME);
     }
 }

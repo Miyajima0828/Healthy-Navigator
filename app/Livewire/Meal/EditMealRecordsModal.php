@@ -18,6 +18,8 @@ class EditMealRecordsModal extends Component
     public array $originalFoodsValue = [];
     protected GetMealServiceInterface $getMealService;
     protected upsertMealServiceInterface $upsertMealService;
+    // モーダルの名前
+    const VIEW_NAME = 'livewire.meal.edit-meal-records-modal';
 
     public function boot(
         GetMealServiceInterface $getMealService
@@ -126,6 +128,6 @@ class EditMealRecordsModal extends Component
 
     public function render()
     {
-        return view('livewire.meal.edit-meal-records-modal');
+        return view(self::VIEW_NAME);
     }
 }

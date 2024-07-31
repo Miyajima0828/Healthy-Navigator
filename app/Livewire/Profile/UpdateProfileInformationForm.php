@@ -14,6 +14,8 @@ use Livewire\WithFileUploads;
 class UpdateProfileInformationForm extends Component
 {
     use WithFileUploads;
+    // ビューの名前
+    const VIEW_NAME = 'livewire.profile.update-profile-information-form';
 
     /**
      * The component's state.
@@ -105,6 +107,6 @@ class UpdateProfileInformationForm extends Component
      */
     public function render()
     {
-        return view('livewire.profile.update-profile-information-form');
+        return view(self::VIEW_NAME);
     }
 }

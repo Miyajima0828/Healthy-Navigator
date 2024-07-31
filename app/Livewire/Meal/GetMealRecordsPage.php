@@ -27,6 +27,8 @@ class GetMealRecordsPage extends Component
     public array $week = [];
     public ?string $selectedDate = null;
     protected GetMealServiceInterface $getMealService;
+    // ビューの名前
+    const VIEW_NAME = 'livewire.meal.get-meal-records-page';
 
     public function mount()
     {
@@ -112,7 +114,7 @@ class GetMealRecordsPage extends Component
     public function render()
     {
         $mealRecords = $this->getMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
-        return view('livewire.meal.get-meal-records-page', compact('mealRecords'))
+        return view(self::VIEW_NAME, compact('mealRecords'))
             ->layout('layouts.app');
     }
 }

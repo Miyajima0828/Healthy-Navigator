@@ -15,6 +15,8 @@ class UpsertMealComponent extends Component
     public array $foods = [];
     public array $originalFoodsValue = [];
     public int $quantity = 100;
+    // モーダルの名前
+    const VIEW_NAME = 'livewire.meal.upsert-meal-component';
 
     public function mount()
     {
@@ -70,6 +72,6 @@ class UpsertMealComponent extends Component
 
     public function render()
     {
-        return view('livewire.meal.upsert-meal-component');
+        return view(self::VIEW_NAME);
     }
 }

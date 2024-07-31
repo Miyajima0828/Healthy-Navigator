@@ -8,6 +8,9 @@ use App\Livewire\food\SearchFoodModal;
 
 class UpsertMealPage extends Component
 {
+    // モーダルの名前
+    const VIEW_NAME = 'livewire.meal.upsert-meal-page';
+
     #[On('callModal')]
     public function callModal()
     {
@@ -17,6 +20,6 @@ class UpsertMealPage extends Component
 
     public function render()
     {
-        return view('livewire.meal.upsert-meal-page')->layout('layouts.app');
+        return view(self::VIEW_NAME)->layout('layouts.app');
     }
 }
