@@ -33,15 +33,28 @@ class UpsertMealComponent extends Component
         $this->upsertMealService = $upsertMealService;
     }
 
+    /**
+     * 食事の記録を登録または更新する
+     * @param MealRequest $request
+     * @return void
+     */
     public function upsertMeal(MealRequest $request)
     {
         $this->upsertMealService = new UpsertMealService();
         $validatedData = $request->validated();
         $this->upsertMealService->store($validatedData);
         session()?->flash('message', '食事を追加しました');
-        return redirect()->route('home');
+        // 食事追加ページからのリクエストの場合はリダイレクト先を変更
+        return $request->header('referer') === env('APP_URL') . '/meal/create' ?
+            redirect()->route('home') :
+            redirect()->route('meal.records');
     }
 
+    /**
+     * 食品を追加する
+     * @param array $food
+     * @return void
+     */
     #[On('addFood')]
     public function addFood($food)
     {
@@ -57,6 +70,12 @@ class UpsertMealComponent extends Component
         ];
     }
 
+    /**
+     * 食品の量を更新する
+     * @param int $id
+     * @param int $quantity
+     * @return void
+     */
     public function updateQuantity($id, $quantity)
     {
         $this->foods[$id]['quantity'] = $quantity;
@@ -66,6 +85,11 @@ class UpsertMealComponent extends Component
         $this->foods[$id]['carbohydrate'] = round($this->originalFoodsValue[$id]['carbohydrate'] * $quantity / 100);
     }
 
+    /**
+     * 食品を削除する
+     * @param int $id
+     * @return void
+     */
     public function removeFood($id)
     {
         unset($this->foods[$id]);
