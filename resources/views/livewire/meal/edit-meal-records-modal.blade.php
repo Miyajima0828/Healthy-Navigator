@@ -31,6 +31,7 @@
                                                 <input type="number" name="foods[{{ $food['id'] }}][quantity]"
                                                     wire:change="updateQuantity({{ $food['id'] }}, $event.target.value)"
                                                     value="{{ $food['quantity'] }}" class="w-full p-2 border rounded">
+                                                    @error('foods.'.$food['id'].'.quantity') <span class="text-red-500">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="col-span-1">{{ $foods[$food['id']]['calorie'] }}</div>
                                             <div class="col-span-1">{{ $foods[$food['id']]['protein'] }}</div>
