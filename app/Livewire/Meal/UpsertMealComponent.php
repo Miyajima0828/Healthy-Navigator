@@ -44,10 +44,7 @@ class UpsertMealComponent extends Component
         $validatedData = $request->validated();
         $this->upsertMealService->store($validatedData);
         session()?->flash('message', '食事を追加しました');
-        // 食事追加ページからのリクエストの場合はリダイレクト先を変更
-        return $request->header('referer') === env('APP_URL') . '/meal/create' ?
-            redirect()->route('home') :
-            redirect()->route('meal.records');
+        return $this->determineRedirect($request);
     }
 
     /**
@@ -93,6 +90,18 @@ class UpsertMealComponent extends Component
     public function removeFood($id)
     {
         unset($this->foods[$id]);
+    }
+
+    /**
+     * リダイレクト先を決定する
+     * @param MealRequest $request
+     * @return void
+     */
+    private function determineRedirect(MealRequest $request)
+    {
+        return $request->header('referer') === env('APP_URL') . '/meal/create' ?
+            redirect()->route('home') :
+            redirect()->route('meal.records');
     }
 
     public function render()
