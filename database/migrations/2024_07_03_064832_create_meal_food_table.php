@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('meal_id');
             $table->foreignId('food_id');
             $table->integer('quantity')->unsigned()->comment('量');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
