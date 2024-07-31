@@ -13,7 +13,7 @@ use Livewire\Component;
 class EditMealRecordsModal extends Component
 {
     public bool $is_show = false;
-    public ?Meal $meal;
+    public ?Meal $meal = null;
     public array $foods = [];
     public array $originalFoodsValue = [];
     protected GetMealServiceInterface $getMealService;
