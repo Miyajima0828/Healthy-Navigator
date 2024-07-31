@@ -47,17 +47,6 @@ class EditMealRecordsModal extends Component
     }
 
     /**
-     * 食事の記録を登録または更新する
-     * @param MealRequest $request
-     * @return void
-     */
-    public function store(MealRequest $request): void
-    {
-        $this->upsertMealService = new UpsertMealService();
-        $this->upsertMealService->store($request->validated());
-    }
-
-    /**
      * 選択した食事の記録を取得する
      * @param Meal $meal
      * @return void
