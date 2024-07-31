@@ -3,8 +3,11 @@
 namespace App\Services\Meal;
 
 use App\Models\Meal;
+use App\Models\MealFood;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 /**
  * 食事関連の処理を行うサービスクラス
@@ -35,7 +38,7 @@ class GetMealService implements GetMealServiceInterface
         });
     }
 
-        /**
+    /**
      * 指定された栄養素の合計値を計算するメソッド
      * @param Collection $meals
      * @param string $nutrient
@@ -49,4 +52,18 @@ class GetMealService implements GetMealServiceInterface
             });
         });
     }
+
+    /**
+     * 該当の食事記録を削除するメソッド
+     * @param int $mealId
+     * @return void
+     */
+    public function deleteMealRecord(int $mealId): void
+    {
+        DB::transaction(function () use ($mealId) {
+            MealFood::query()->where('meal_id', $mealId)->delete();
+            Meal::query()->findOrFail($mealId)->delete();
+        });
+    }
+
 }

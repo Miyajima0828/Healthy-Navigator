@@ -15,11 +15,17 @@ interface GetMealServiceInterface
      */
     public function getMealRecords(Carbon $startDate, Carbon $endDate = null): Collection;
 
-        /**
+    /**
      * 指定された栄養素の合計値を計算するメソッド
      * @param Collection $meals
      * @param string $nutrient
      * @return int
      */
     public function calculateNutrientSum(Collection $meals, string $nutrient): int;
+
+    /**
+     * 該当の食事記録を削除するメソッド
+     * @param int $mealId
+     */
+    public function deleteMealRecord(int $mealId);
 }

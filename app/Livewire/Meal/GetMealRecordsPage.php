@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Meal;
 
+use App\Models\Meal;
 use App\Services\Meal\GetMealServiceInterface;
 use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Meal\EditMealRecordsModal;
 
 /**
  * @property Carbon today
@@ -72,7 +74,7 @@ class GetMealRecordsPage extends Component
      * selectedDateの日付を一週間分遡るメソッド
      * @return void
      */
-    public function showPreviousWeek()
+    public function showPreviousWeek(): void
     {
         $this->selectedDate = Carbon::parse($this->selectedDate)->subWeek()->toDateString();
         $this->getMealRecordsByDate();
@@ -82,16 +84,35 @@ class GetMealRecordsPage extends Component
      * selectedDateの日付を一週間分進めるメソッド
      * @return void
      */
-    public function showNextWeek()
+    public function showNextWeek(): void
     {
         $this->selectedDate = Carbon::parse($this->selectedDate)->addWeek()->toDateString();
         $this->getMealRecordsByDate();
+    }
+
+    /**
+     * 食事記録を削除するメソッド
+     */
+    public function deleteMealRecord($mealId)
+    {
+        $this->getMealService->deleteMealRecord($mealId);
+        $this->getMealRecordsByDate();
+    }
+
+    /**
+     * 食事記録を編集するモーダルを開くメソッド
+     * @param Meal $meal
+     * @return void
+     */
+    public function editMealRecord(Meal $meal): void
+    {
+        $this->dispatch('editMealRecord', $meal)->to(EditMealRecordsModal::class);
     }
 
     public function render()
     {
         $mealRecords = $this->getMealService->getMealRecords($this->startOfWeek, $this->endOfWeek);
         return view('livewire.meal.get-meal-records-page', compact('mealRecords'))
-        ->layout('layouts.app');
+            ->layout('layouts.app');
     }
 }

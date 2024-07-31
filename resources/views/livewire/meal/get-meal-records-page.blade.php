@@ -1,4 +1,11 @@
 <div class="container mx-auto px-4 py-6">
+    <div>
+        @if (session()->has('message'))
+            <div class="animate-flash fixed top-24 translate-x-1/2 right-6 sm:translate-x-0 z-30 w-fit max-w-[90%] sm:max-w-1/2 py-4 px-6 flex justify-center items-center bg-white shadow-lg border border-line-100 rounded-[3px]">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -26,22 +33,23 @@
         <div class="min-w-max">
             <div class="grid grid-cols-8 gap-0 border border-gray-600">
                 <!-- Header Row -->
-                <div
-                    class="sticky left-0 col-span-1 font-bold border border-gray-600 px-2 py-2 text-center bg-orange-200 ">
-                    種類</div>
+                <div class="col-span-1 font-bold border border-gray-600 px-2 py-2 text-center bg-orange-200 ">
+
+                </div>
                 @foreach ($week as $date)
                     <div class="col-span-1 font-bold border border-gray-600 px-4 py-2 text-center bg-orange-200 ">
-                        {{ $date->format('m/d(D)') }}</div>
+                        {{ $date->format('m/d(D)') }}
+                    </div>
                 @endforeach
                 <!-- Data Rows -->
                 @foreach (['朝食', '昼食', '夕食', '間食'] as $mealType)
                     <div
-                        class="sticky left-0 col-span-1 font-bold border border-gray-600 px-2 py-2 bg-orange-200 text-center place-content-center h-40 overflow-auto">
+                        class="left-0 col-span-1 font-bold border border-gray-600 px-2 py-2 bg-orange-200 text-center place-content-center h-40 overflow-auto">
                         {{ $mealType }}
                     </div>
                     @foreach ($week as $date)
                         <div
-                            class="col-span-1 border border-gray-600 px-4 py-2 {{ $today->format('Y-m-d') === $date->format('Y-m-d') ? 'bg-yellow-100' : 'bg-white' }} h-40 overflow-auto">
+                            class="group relative col-span-1 border border-gray-600 px-4 py-2 {{ $today->format('Y-m-d') === $date->format('Y-m-d') ? 'bg-yellow-100' : 'bg-white' }} h-40 overflow-auto">
                             @php
                                 $meal = $mealRecords
                                     ->where('date', $date->format('Y-m-d'))
@@ -61,6 +69,30 @@
                             @else
                                 <p>登録なし</p>
                             @endif
+                            <div class="px-4 py-2 text-center">
+                                @if ($meal)
+                                    <div class="flex justify-end">
+                                        <button
+                                            wire:click="deleteMealRecord({{ $meal->id }})"
+                                            class="hidden group-hover:block absolute top-2 right-2 px-2 py-1 font-bold text-white bg-gray-500 opacity-25 rounded hover:bg-red-700 hover:opacity-100"
+                                            wire:confirm="食事記録を削除しますか？"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-end">
+                                            <button
+                                                wire:click="editMealRecord({{ $meal }})"
+                                                class="hidden group-hover:block absolute bottom-2 right-2 px-2 py-1 font-bold text-white bg-gray-500 opacity-50 rounded hover:bg-green-500 hover:opacity-100"
+                                            >
+                                                編集
+                                            </button>
+                                            @livewire('meal.edit-meal-records-modal')
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                 @endforeach
